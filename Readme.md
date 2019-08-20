@@ -1,6 +1,6 @@
 # NodeJS Projects
 
-Application to CRUS projects into a Array in NodeJS
+Application to CRUD projects into a Array in NodeJS
 
 
 ### Topics
