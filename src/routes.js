@@ -2,6 +2,28 @@ const express = require("express");
 const routes = express.Router();
 
 const projects = [];
+let requests = null;
+
+routes.use((req, res, next) => {
+  let valueRequest = (requests = requests + 1);
+  console.log("Requests: " + valueRequest);
+
+  next();
+});
+
+function checkProcjectExists(req, res, next) {
+  const { id } = req.params;
+
+  //FIND THE ID AND THEN COMPARE STRINGS.
+  const project = projects.find(p => p.id == id);
+
+  if (!project)
+    return res.status(400).json({
+      error: "Project does not exist."
+    });
+
+  return next();
+}
 
 //LIST PROJECTS
 routes.get("/projects", (req, res) => {
@@ -9,7 +31,7 @@ routes.get("/projects", (req, res) => {
 });
 
 //LIST ONE PROJECT
-routes.get("/projects/:id", (req, res) => {
+routes.get("/projects/:id", checkProcjectExists, (req, res) => {
   const { id } = req.params;
 
   return res.json(projects[id]);
@@ -32,7 +54,7 @@ routes.post("/projects", (req, res) => {
 });
 
 //EDIT PROJECT
-routes.put("/projects/:id", (req, res) => {
+routes.put("/projects/:id", checkProcjectExists, (req, res) => {
   const { id } = req.params;
 
   //FIND THE ID AND THEN COMPARE STRINGS.
@@ -44,7 +66,7 @@ routes.put("/projects/:id", (req, res) => {
 });
 
 //DELETE PROJECT
-routes.delete("/projects/:id", (req, res) => {
+routes.delete("/projects/:id", checkProcjectExists, (req, res) => {
   const { id } = req.params;
 
   project = projects.findIndex(p => p.id == id);
@@ -57,7 +79,7 @@ routes.delete("/projects/:id", (req, res) => {
 });
 
 //ADD NEW TASK TO PROJECT
-routes.post("/projects/:id/tasks", (req, res) => {
+routes.post("/projects/:id/tasks", checkProcjectExists, (req, res) => {
   const { id } = req.params;
   const { task } = req.body;
   const last = projects.length;
