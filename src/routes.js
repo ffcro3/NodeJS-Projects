@@ -4,12 +4,12 @@ const routes = express.Router();
 const projects = [];
 let requests = null;
 
-routes.use((req, res, next) => {
-  let valueRequest = (requests = requests + 1);
-  console.log("Requests: " + valueRequest);
+function numberRequests(req, res, next) {
+  requests++;
+  console.log("Requests: " + requests);
 
   next();
-});
+}
 
 function checkProcjectExists(req, res, next) {
   const { id } = req.params;
@@ -24,6 +24,8 @@ function checkProcjectExists(req, res, next) {
 
   return next();
 }
+
+routes.use(numberRequests);
 
 //LIST PROJECTS
 routes.get("/projects", (req, res) => {
