@@ -56,4 +56,17 @@ routes.delete("/projects/:id", (req, res) => {
   });
 });
 
+//ADD NEW TASK TO PROJECT
+routes.post("/projects/:id/tasks", (req, res) => {
+  const { id } = req.params;
+  const { task } = req.body;
+  const last = projects.length;
+
+  project = projects.find(p => p.id == id);
+
+  project.tasks.push(task);
+
+  return res.json(project);
+});
+
 module.exports = routes;
