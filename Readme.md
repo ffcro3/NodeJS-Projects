@@ -1,7 +1,9 @@
 # NodeJS Projects
+```
+Crie uma aplicação do zero utilizando Express.
 
-Application to CRUD projects into a Array in NodeJS
-
+Essa aplicação será utilizada para armazenar projetos e suas tarefas.
+```
 
 ### Topics
 
