@@ -3,7 +3,7 @@
 
 <a  href="https://nodejs.org/en/" target="_blank">
 
-<img  width="160px"  src="https://i.imgur.com/6syIF0C.png"><br/>
+<center><img  width="160px"  src="https://i.imgur.com/6syIF0C.png"><br/></center>
 
 </a>
 
@@ -26,9 +26,6 @@
 ```
 
 Crie uma aplicação do zero utilizando Express.
-
-  
-
 Essa aplicação será utilizada para armazenar projetos e suas tarefas.
 
 ```
